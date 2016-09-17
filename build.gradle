@@ -1,0 +1,13 @@
+apply plugin: 'java'
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+dependencies {
+	compile 'se.llbit.chunky:chunky-core:1.4.0-SNAPSHOT'
+}

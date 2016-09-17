@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.llbit.chunky.plugman.PluginDetailsController">
+   <children>
+      <HBox alignment="BASELINE_LEFT" spacing="10.0">
+         <children>
+            <Label text="Jar:" />
+            <TextField fx:id="jarPath" editable="false" />
+            <Button fx:id="browseButton" mnemonicParsing="false" text="Browse ..." />
+         </children>
+      </HBox>
+      <HBox alignment="BASELINE_LEFT" spacing="10.0">
+         <children>
+            <Label text="Main Class:" />
+            <TextField fx:id="mainClass" />
+         </children>
+      </HBox>
+      <HBox alignment="BASELINE_LEFT" spacing="10.0">
+         <children>
+            <CheckBox fx:id="enabled" mnemonicParsing="false" selected="true" text="Enabled" />
+         </children>
+      </HBox>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0">
+        <buttons>
+          <Button fx:id="saveButton" defaultButton="true" mnemonicParsing="false" text="Save" />
+            <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" text="Cancel" />
+        </buttons>
+      </ButtonBar>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+   </padding>
+</VBox>
