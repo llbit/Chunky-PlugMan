@@ -53,7 +53,7 @@ public class PlugMan extends Application {
     Parent root = loader.load();
     stage.setTitle("Chunky Plugin Manager");
     Scene scene = new Scene(root);
-    scene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+    stage.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
       if (event.getCode() == KeyCode.ESCAPE) {
         stage.hide();
       }
