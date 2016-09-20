@@ -37,6 +37,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import se.llbit.chunky.PersistentSettings;
 import se.llbit.json.JsonArray;
@@ -74,23 +75,7 @@ public class PlugManController implements Initializable {
         throw new Error(e1);
       }
     });
-    editButton.setOnAction(e -> {
-      try {
-        JsonObject selectedPlugin = tableView.getSelectionModel().getSelectedItem();
-        if (selectedPlugin != null) {
-          PluginDetails pluginDetails = new PluginDetails(selectedPlugin,
-              result -> {
-                int prevIndex = tableView.getItems().indexOf(selectedPlugin);
-                tableView.getItems().remove(prevIndex);
-                tableView.getItems().add(prevIndex, result);
-                tableView.getSelectionModel().select(result);
-              });
-          pluginDetails.show();
-        }
-      } catch (IOException e1) {
-        throw new Error(e1);
-      }
-    });
+    editButton.setOnAction(e -> editItem(tableView.getSelectionModel().getSelectedItem()));
     removeButton.setOnAction(
         event -> tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem()));
     upButton.setOnAction(event -> {
@@ -120,5 +105,33 @@ public class PlugManController implements Initializable {
       JsonObject plugin = pluginValue.object();
       tableView.getItems().add(plugin);
     }
+
+    tableView.setRowFactory(table -> {
+      TableRow<JsonObject> row = new TableRow<>();
+      row.setOnMouseClicked(event -> {
+        if (event.getClickCount() == 2 && !row.isEmpty()) {
+          editItem(row.getItem());
+        }
+      });
+      return row;
+    });
+  }
+
+  private void editItem(JsonObject selectedPlugin) {
+    try {
+      if (selectedPlugin != null) {
+        PluginDetails pluginDetails = new PluginDetails(selectedPlugin,
+            result -> {
+              int prevIndex = tableView.getItems().indexOf(selectedPlugin);
+              tableView.getItems().remove(prevIndex);
+              tableView.getItems().add(prevIndex, result);
+              tableView.getSelectionModel().select(result);
+            });
+        pluginDetails.show();
+      }
+    } catch (IOException e1) {
+      throw new Error(e1);
+    }
+
   }
 }
